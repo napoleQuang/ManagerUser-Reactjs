@@ -1,5 +1,6 @@
 import Header from "./component/Header";
 import Tables from "./component/Tables";
+import Home from "./component/Home";
 
 import Container from 'react-bootstrap/Container';
 
@@ -8,9 +9,9 @@ function App() {
     <div className="App">
       <Header />
       <Container>
-        <Tables />
+        <Home />
       </Container>
-      <i class="fa-solid fa-arrow-up"></i>
+     
     </div>
   );
 }

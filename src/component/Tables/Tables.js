@@ -4,6 +4,7 @@ import { ModalAdd, ModalUpdate, ModalDelete } from "../Modals";
 
 import { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
+import { CSVLink } from "react-csv";
 
 function Tables() {
     const [userList, setUserList] = useState([]);
@@ -64,34 +65,54 @@ function Tables() {
         }
     }
 
-    const Sort=(sortBy, sortFild) => {
+    const Sort = (sortBy, sortFild) => {
         let cloneList = [...userList]
-        if(sortFild==='name') {
-            if(sortBy==='asc') {
-                cloneList = cloneList.sort((a,b) => (a.first_name > b.first_name) ? 1 : ((b.first_name > a.first_name) ? -1 : 0));
+        if (sortFild === 'name') {
+            if (sortBy === 'asc') {
+                cloneList = cloneList.sort((a, b) => (a.first_name > b.first_name) ? 1 : ((b.first_name > a.first_name) ? -1 : 0));
             }
-            else{
-                cloneList = cloneList.sort((a,b) => (a.first_name < b.first_name) ? 1 : ((b.first_name < a.first_name) ? -1 : 0));
+            else {
+                cloneList = cloneList.sort((a, b) => (a.first_name < b.first_name) ? 1 : ((b.first_name < a.first_name) ? -1 : 0));
             }
         }
         else {
-            if(sortBy==='asc') {
-                cloneList = cloneList.sort((a,b) => a.id - b.id);
+            if (sortBy === 'asc') {
+                cloneList = cloneList.sort((a, b) => a.id - b.id);
                 console.log(cloneList);
             }
-            else{
-                cloneList = cloneList.sort((a,b) => b.id - a.id);
+            else {
+                cloneList = cloneList.sort((a, b) => b.id - a.id);
                 console.log(cloneList);
             }
         }
         setUserList(cloneList);
     }
 
+    const headers = [
+        { label: "Id", key: "id" },
+        { label: "First Name", key: "first_name" },
+        { label: "Last Name", key: "last_name" },
+        { label: "Email", key: "email" }
+    ];
+
     return (
         <>
             <div className="my-3 d-flex justify-content-between align-items-center">
                 <span>List Users:</span>
-                <button type="button" class="btn btn-success" onClick={() => setShowModalAdd(true)}>Add User</button>
+                <div class="col-4 d-flex justify-content-between">
+                    <CSVLink
+                        data={userList}
+                        filename={"my-file.csv"}
+                        className="btn btn-success col-3"
+                        headers={headers}
+                    >
+                        Export
+                    </CSVLink>
+                    <label htmlFor="import" class="btn btn-success col-3">Import</label>
+                    {/* <input id='import' type='file' hidden onClick={(event)=>console.log(event.target)}/> */}
+                    <button type="button" class="btn btn-success  col-3" onClick={() => setShowModalAdd(true)}>Add User</button>
+                </div>
+
             </div>
             <div className='col-4 my-3'>
                 <input className='form-control' placeholder='Search' onChange={(event) => handleSearch(event)} />
@@ -100,13 +121,13 @@ function Tables() {
                 <thead>
                     <tr>
                         <th>#
-                            <i className="fa-solid fa-arrow-up ms-2" onClick={()=>Sort('asc','id')}></i>
-                            <i className="fa-solid fa-arrow-down ms-1" onClick={()=>Sort('desc','id')}></i>
+                            <i className="fa-solid fa-arrow-up ms-2" onClick={() => Sort('asc', 'id')}></i>
+                            <i className="fa-solid fa-arrow-down ms-1" onClick={() => Sort('desc', 'id')}></i>
                         </th>
                         <th>First Name
-                            <i className="fa-solid fa-arrow-up ms-2" onClick={()=>Sort('asc','name')}></i>
-                            <i className="fa-solid fa-arrow-down ms-1" onClick={()=>Sort('desc','name')}></i>
-                            
+                            <i className="fa-solid fa-arrow-up ms-2" onClick={() => Sort('asc', 'name')}></i>
+                            <i className="fa-solid fa-arrow-down ms-1" onClick={() => Sort('desc', 'name')}></i>
+
                         </th>
                         <th>Last Name</th>
                         <th>Email</th>
