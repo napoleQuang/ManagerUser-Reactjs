@@ -109,7 +109,7 @@ function Tables() {
                         Export
                     </CSVLink>
                     <label htmlFor="import" class="btn btn-success col-3">Import</label>
-                    {/* <input id='import' type='file' hidden onClick={(event)=>console.log(event.target)}/> */}
+                    <input id='import' type='file' hidden onChange={(event)=>console.log(event.target.files[0])}/>
                     <button type="button" class="btn btn-success  col-3" onClick={() => setShowModalAdd(true)}>Add User</button>
                 </div>
 
@@ -155,6 +155,7 @@ function Tables() {
             <ModalAdd show={showModalAdd} handleClose={() => setShowModalAdd(false)} handleAdd={handleAdd} />
             <ModalUpdate show={showModalUpdate} handleClose={() => setShowModalUpdate(false)} user={currentUser} handleUpdateUser={handleUpdateUser} />
             <ModalDelete show={showModalDelete} handleClose={() => setShowModalDelete(false)} user={currentUser} handleDeleteUser={handleDeleteUser} />
+            
         </>
     );
 }

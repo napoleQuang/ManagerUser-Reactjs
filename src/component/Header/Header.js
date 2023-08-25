@@ -2,22 +2,23 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { NavLink } from "react-router-dom";
 
 function Header() {
     return (<>
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
-                <Navbar.Brand href="#home">Manager User</Navbar.Brand>
+                <Navbar.Brand href="/">Manager User</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#user">User</Nav.Link>
+                        <NavLink to="/" className="nav-link">Home</NavLink>
+                        <NavLink to="/user" className="nav-link">User</NavLink>
                     </Nav>
                     <Nav>
                         <NavDropdown title="Setting" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#login">Log in</NavDropdown.Item>
-                            <NavDropdown.Item href="#logout">Log out</NavDropdown.Item>
+                            <NavLink to="/login" className="dropdown-item">Log in</NavLink>
+                            <NavLink to="/logout" className="dropdown-item">Log out</NavLink>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

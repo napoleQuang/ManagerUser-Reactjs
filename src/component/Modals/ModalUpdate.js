@@ -3,7 +3,7 @@ import updateSevices from '../../sevices/updateSevices.js';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useState, useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 function ModalUpdate(props) {
     const { handleClose, show, user ,handleUpdateUser } = props;
     const [name, setName] = useState('');
@@ -48,18 +48,7 @@ function ModalUpdate(props) {
             </Modal>
 
 
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss={false}
-                draggable
-                pauseOnHover
-                theme="light"
-            />
+           
         </>
     );
 }

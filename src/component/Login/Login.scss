@@ -1,0 +1,27 @@
+button{
+    cursor: pointer;
+    background-color: aqua;
+    border: 1px solid transparent;
+    padding: 10px 0px;
+    &:hover{
+        opacity: 0.5;
+    }
+}
+
+button:disabled,
+button[disabled]{
+  border-color:  #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor:not-allowed;
+}
+
+.pass{
+    position: relative;
+}
+
+i{
+    position: absolute;
+    right:10px;
+    top :10px;
+}

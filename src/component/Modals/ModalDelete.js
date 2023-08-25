@@ -2,7 +2,7 @@ import deleteSevices from '../../sevices/deleteSevices.js';
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 function ModalDelete(props) {
     const { handleClose, show, user, handleDeleteUser } = props;
 
@@ -38,18 +38,7 @@ function ModalDelete(props) {
             </Modal>
 
 
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss={false}
-                draggable
-                pauseOnHover
-                theme="light"
-            />
+            
         </>
     );
 }
