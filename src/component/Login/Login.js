@@ -1,7 +1,8 @@
-import './Login.scss';
+import styles from './Login.scss';
 import loginSevices from '../../sevices/loginSevices.js'
+import { UserContext } from '../../context/UserContext.js';
 
-import { useState } from "react";
+import { useState,useContext } from "react";
 import {  toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
@@ -12,12 +13,17 @@ function Login() {
     const [hidePass, setHidePass] = useState(true);
 
     const navigate = useNavigate();
+    const { login } = useContext(UserContext);
 
     const handleClick = async () => {
         if (email && pass) {
             const res = await loginSevices(email, pass);
             if (res && res.token) {
-                console.log(res);
+                await login(email);
+
+                localStorage.setItem('token', res.token);
+                localStorage.setItem('email', email);
+
                 toast.success('Log in successful');
                 navigate("/");
             }
@@ -26,6 +32,7 @@ function Login() {
             }
         }
     }
+    
 
 
 
@@ -39,7 +46,7 @@ function Login() {
             </div>
             <div class="form-outline mb-4 pass">
                 <input type={hidePass ? "password" : ""} id="form2Example2" class="form-control" value={pass} onChange={(e) => setPass(e.target.value)} />
-                <span onClick={() => setHidePass(!hidePass)}>{hidePass ? <i class="fa-solid fa-eye-slash"></i> : <i class="fa-solid fa-eye"></i>}</span>
+                <span onClick={() => setHidePass(!hidePass)}>{hidePass ? <i class="fa-solid fa-eye-slash icon"></i> : <i class="fa-solid fa-eye icon" ></i>}</span>
                 <label class="form-label" htmlFor="form2Example2">Password</label>
             </div>
             <button type="button" class=" btn-block mb-4 col-6 align-self-center" disabled={!(email && pass)} onClick={handleClick}>Sign in</button>
